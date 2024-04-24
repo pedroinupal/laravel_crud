@@ -39,7 +39,8 @@ class NoteController extends Controller
         ]);
 
         #return to_route('notes.index');
-        return redirect()->route('notes.index');
+        return redirect()->route('notes.index')
+            ->with('success','Nota creada exitosamente');
     }
 
     /**
@@ -65,7 +66,14 @@ class NoteController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $note = Note::nota_por_id($id);
+
+        $note->update([
+            'title'     =>  $request->title,
+            'content'   =>  $request->content
+        ]);
+
+        return redirect()->route('notes.show', $id);
     }
 
     /**
@@ -73,6 +81,13 @@ class NoteController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $note = Note::nota_por_id($id);
+
+        // $note->delete();
+        $note->update([
+            'active'     =>  false,
+        ]);
+
+        return redirect()->route('notes.index');
     }
 }
