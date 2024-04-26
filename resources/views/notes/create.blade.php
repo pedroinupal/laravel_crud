@@ -30,8 +30,18 @@
 
                     <div class="mb-3">
                         <label for="" class="form-label">Content</label>
-                        <textarea name="content" id="" rows="10" class="form-control"></textarea>
+                        <textarea name="content" id="" rows="10" class="form-control"></textarea> 
                     </div>
+
+                    <select name="category_id" class="form-select" aria-label="Default select example">
+                        <option selected>Category</option>
+                        @forelse($categories as $category)
+                        
+                        <option value="{{$category -> id}}">{{$category -> category_name}}</option>
+                        @empty
+                        <option value="1">No hay categorias</option>
+                        @endforelse
+                    </select>
 
                     <div class="text-end">
                         <input type="submit" value="Crear Nota" class="btn btn-success">

@@ -19,7 +19,7 @@
             </div>
         </div>
     
-        
+         
  
         <div class="row justify-content-center">
             <div class="col-12 col-md-9 col-lg-6">
@@ -31,7 +31,10 @@
                         </tr>
                     </tbody>
                 </table>
+                <h3 class="text-center">Content</h3>
                 <p style="white-space: pre-wrap;">{{$note->content}}</p>
+                <h3 class="text-center">Category</h3>
+                <p class="text-center" style="white-space: pre-wrap;">{{$note->category_name}}</p>
 
                 <div class="text-end">
                     <a href="{{ route('notes.edit',$note->id)}}" class = "btn btn-warning">Editar nota</a>
@@ -45,7 +48,7 @@
 
                 </div>
             </div>
-        </div>
+        </div> 
 
     </div>
 </body>

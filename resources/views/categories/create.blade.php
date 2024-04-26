@@ -18,7 +18,7 @@
         </div>
     
         <div class="row justify-content-center">
-            <div class="col-12 col-md-9 col-lg-6">
+            <div class="col-12 col-md-9 col-lg-6"> 
                
                 <form action="{{route('categories.store')}}" method="post">
                     @csrf

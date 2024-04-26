@@ -14,7 +14,7 @@
         <div class="row mb-4">
             <div class="col">
                 <header class="bg-info py-3 text-center">
-                    <h1 class ="mb-0 text-white">{{$category -> id}}</h1>
+                    <h1 class ="mb-0 text-white">Category ID: {{$categories -> id}}</h1>
                 </header>
             </div>
         </div>
@@ -26,15 +26,48 @@
                 <table class="table mb-4">
                     <tbody>
                         <tr>
-                            <td><b>Created at: </b>{{$category->created_at->diffforHumans()}}</td>
-                            <td><b>Updated at: </b>{{$category->updated_at->diffforHumans()}}</td>
+                            <td><b>Created at: </b>{{$categories->created_at->diffforHumans()}}</td>
+                            <td><b>Updated at: </b>{{$categories->updated_at->diffforHumans()}}</td>
                         </tr>
                     </tbody>
                 </table>
-                <p style="white-space: pre-wrap;">{{$category->category_name}}</p>
+                <p class="text-center" style="white-space: pre-wrap; font-size: larger; font-weight: bold;">Category : {{$categories->category_name}}</p>
+
+                <table class="table">
+       
+                    <thead>
+                        <tr>
+                            <th>Note id</th>
+                            <th>Title</th>
+                            <th>Content</th>
+                            <th>Category</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse($notes as $note)  
+                            <tr>
+                                <td>{{$note -> id}}</td>
+                                <td>{{$note -> title}}</td>
+                                <td>{{$note -> content}}</td>
+                                <td>{{$note -> category_name}}</td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td class="text-center" colspan="4">There are no notes with this category</td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table> 
 
                 <div class="text-end">
-                    <a href="{{ route('categories.edit',$category->id)}}" class = "btn btn-warning">Edit category</a>
+                    <a href="{{ route('categories.edit',$categories->id)}}" class = "btn btn-warning">Edit category</a>
+
+                    <form action="{{ route('categories.destroy', $categories->id) }}" method="post">
+                        @csrf
+                        @method('delete')
+
+                        <input type="submit" value="Delete category" class="btn btn-danger" onclick="return confirm('¿Are you sure you want to delete this category?')">
+                    </form>    
                 </div>
             </div>
         </div>

@@ -26,7 +26,7 @@
                     
                     <div class="mb-3">
                         <label for="" class="form-label">Category name</label>
-                        <input type="text" name = "title" class="form-control" value="{{$category->category_name}}">
+                        <input type="text" name = "category_name" class="form-control" value="{{$category->category_name}}">
                     </div>
 
                     <div class="text-end">

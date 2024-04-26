@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('notes', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('category_id')->nullable()->references('id')->on('categories')->constrained()->default(NULL);
             $table->string('title',100);
             $table->longText('content');
             $table->boolean('active')->default(true);

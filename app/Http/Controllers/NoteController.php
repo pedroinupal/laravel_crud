@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Note; 
+use App\Models\Category; 
 
 class NoteController extends Controller
 {
@@ -14,15 +15,17 @@ class NoteController extends Controller
     {
         $notes = Note::todas_las_notas();
         #dd($notes);
+      
         return view ('notes.index',compact('notes'));
     }
-
+ 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        return view ('notes.create');
+        $categories = Category::todas_las_categorias();
+        return view ('notes.create',compact('categories'));
     }
 
     /**
@@ -34,7 +37,8 @@ class NoteController extends Controller
         Note::create([
             
             'title' => $request->title,
-            'content' => $request->content
+            'content' => $request->content,
+            'category_id' => $request->category_id
             
         ]);
 
@@ -48,7 +52,7 @@ class NoteController extends Controller
      */
     public function show(string $id)
     {
-        return view('notes.show')
+        return view('notes.show') 
         ->with('note',Note::nota_por_id($id));
     }
 
@@ -58,7 +62,8 @@ class NoteController extends Controller
     public function edit(string $id)
     {
         return view('notes.edit')
-        ->with('note',Note::nota_por_id($id));
+        ->with('note',Note::nota_por_id($id))
+        ->with('categories',Category::todas_las_categorias());
     }
 
     /**
@@ -70,7 +75,8 @@ class NoteController extends Controller
 
         $note->update([
             'title'     =>  $request->title,
-            'content'   =>  $request->content
+            'content'   =>  $request->content,
+            'category_id'   =>  $request->category
         ]);
 
         return redirect()->route('notes.show', $id);

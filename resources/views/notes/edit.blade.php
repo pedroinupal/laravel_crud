@@ -12,10 +12,10 @@
         <div class="row mb-4">
             <div class="col">
                 <header class="bg-danger py-3 text-center">
-                    <h1 class ="mb-0 text-white">Editar Nota</h1>
+                    <h1 class ="mb-0 text-white">Edit note</h1>
                 </header>
             </div>
-        </div>
+        </div> 
     
         <div class="row justify-content-center">
             <div class="col-12 col-md-9 col-lg-6">
@@ -25,7 +25,7 @@
                     @method('put')
                     
                     <div class="mb-3">
-                        <label for="" class="form-label">Título</label>
+                        <label for="" class="form-label">Title</label>
                         <input type="text" name = "title" class="form-control" value="{{$note->title}}">
                     </div>
 
@@ -33,6 +33,18 @@
                         <label for="" class="form-label">Content</label>
                         <textarea name="content" id="" rows="10" class="form-control">{{$note->content}}</textarea>
                     </div>
+
+
+                    <select name="category" class="form-select" aria-label="Default select example">
+                        <option selected>{{$note->category_name}}</option>
+                        @forelse($categories as $category)
+                        
+                        <option value="{{$category -> id}}">{{$category -> category_name}}</option>
+                        @empty
+                        <option value="1">No hay categorias</option>
+                        @endforelse
+                    </select>
+
 
                     <div class="text-end">
                         <input type="submit" value="Editar Nota" class="btn btn-success" >

@@ -17,7 +17,7 @@
                     <h1 class ="mb-0 text-white">Notes</h1>
                 </header>
             </div>
-        </div>
+        </div> 
         
         @if(session('success'))
             <div class="row justify-content-center mb-4">
@@ -41,24 +41,25 @@
     <div class="row">
         <div class="col">
             <table class="table">
-            
+       
                 <thead>
                     <tr>
                         <th>id</th>
                         <th>Title</th>
                         <th>Content</th>
+                        <th>Category</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse($notes as $note)
+                    @forelse($notes as $note) 
                         <tr>
                             <td>{{$note -> id}}</td>
                             <td>{{$note -> title}}</td>
                             <td>{{$note -> content}}</td>
+                            <td>{{$note -> category_name}}</td>
                              <td>   
                                 <a href="{{route('notes.show',$note->id)}}" class="btn btn-secondary">Ver</a>
-
                              </td>
                         </tr>
                     @empty
